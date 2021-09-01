@@ -37,8 +37,10 @@
                                     <th scope="col">SL</th>
                                     <th scope="col">ID</th>
                                     <th scope="col">Category Name</th>
+                                    <th scope="col">User Name</th>
                                     <th scope="col">User id</th>
                                     <th scope="col">Created At</th>
+                                    <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -51,8 +53,17 @@
                                     <th scope="row">{{$i++}}</th>
                                     <td>{{$item->id}}</td>
                                     <td>{{$item->category_name}}</td>
+                                    <td>{{$item->user->name}}</td>
                                     <td>{{$item->user_id}}</td>
                                     <td>{{$item->created_at->diffForHumans()}}</td>
+
+                                    <td>
+
+                                        <a href="{{url('category/edit/'.$item->id)}}" class="btn btn-info"> Edit</a>
+
+                                        <a href="{{url('softdelete/category/'.$item->id)}}" class="btn btn-danger">
+                                            Delete</a>
+                                    </td>
                                 </tr>
 
                                 @endforeach
@@ -91,6 +102,75 @@
 
             </div>
         </div>
+
+        <!-- TRASH PART -->
+
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-8">
+                    <div class="card">
+
+
+
+                        <div class="card-header"> Trash List </div>
+
+
+
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">SL</th>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Category Name</th>
+                                    <th scope="col">User Name</th>
+                                    <th scope="col">User id</th>
+                                    <th scope="col">Created At</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @php($i=1)
+                                @foreach ($trashCat as $item)
+
+
+                                <tr>
+                                    <th scope="row">{{$i++}}</th>
+                                    <td>{{$item->id}}</td>
+                                    <td>{{$item->category_name}}</td>
+                                    <td>{{$item->user->name}}</td>
+                                    <td>{{$item->user_id}}</td>
+                                    <td>{{$item->created_at->diffForHumans()}}</td>
+
+                                    <td>
+
+                                        <a href="{{url('category/restore/'.$item->id)}}" class="btn btn-info">
+                                            Restore</a>
+                                        <a href="{{url('pdelete/category/'.$item->id)}}" class="btn btn-danger">
+                                            Delete</a>
+                                    </td>
+                                </tr>
+
+                                @endforeach
+
+                            </tbody>
+                        </table>
+                        {{ $trashCat->links() }}
+
+                    </div>
+                </div>
+
+                <div class="col-md-4 ">
+
+                </div>
+
+
+            </div>
+        </div>
+
+        <!-- END TRASH -->
+
     </div>
 
 
