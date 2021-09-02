@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 //use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\BrandController;
 use App\Models\User;
 
 /*
@@ -31,6 +32,9 @@ Route::get('/pdelete/category/{id}', [CategoryController::class, 'Pdelete']);
 
 
 
+//Brand
+Route::get('/brand/all', [BrandController::class, 'AllBrand'])->name('all.brand');  
+Route::post('/brand/add', [BrandController::class, 'StoreBrand'])->name('store.brand');
 
 
 
